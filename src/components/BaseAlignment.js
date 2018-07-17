@@ -8,6 +8,7 @@ class BaseAlignment extends Component {
   constructor(props) {
     super(props);
     this.canvas_id = props.id + "-alignment";
+    console.log("alignment coonstructor!");
   }
   componentDidMount() {
     document

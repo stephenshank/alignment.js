@@ -1,11 +1,9 @@
-import Alignment from "./components/Alignment.jsx";
-import BaseAlignment from "./components/BaseAlignment.jsx";
-import SiteAxis from "./components/SiteAxis.jsx";
-import SequenceAxis from "./components/SequenceAxis.jsx";
+import Alignment from "./components/Alignment.js";
+import BaseAlignment from "./components/BaseAlignment.js";
+import SiteAxis from "./components/SiteAxis.js";
+import SequenceAxis from "./components/SequenceAxis.js";
 import fastaParser from "./helpers/fasta";
 import ScrollBroadcaster from "./helpers/ScrollBroadcaster";
-
-require("./app.scss");
 
 module.exports = Alignment;
 module.exports.Alignment = Alignment;

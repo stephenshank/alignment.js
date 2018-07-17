@@ -1,14 +1,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  entry: path.resolve("src", "index.jsx"),
+  entry: path.resolve(__dirname, "src", "index.jsx"),
   plugins: [
     new HtmlWebpackPlugin({
       title: "Javascript Alignment Viewer"
-    }),
-    new ExtractTextPlugin("alignment.css")
+    })
   ],
   module: {
     rules: [
@@ -34,15 +32,15 @@ module.exports = {
       },
       {
         test: /\.scss?$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ["css-loader", "sass-loader"]
-        })
+        use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   },
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, "dist")
   }
 };

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 const $ = require("jquery");
 
-import Modal from "./Modal.jsx";
+import Modal from "./Modal.js";
 
 class Export extends Component {
   constructor(props) {

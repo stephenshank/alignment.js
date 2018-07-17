@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import Import from "./Import.jsx";
-import Export from "./Export.jsx";
-import DropDownOfAlignmentsToView from "./DropDownOfAlignmentsToView.jsx";
+import Import from "./Import.js";
+import Export from "./Export.js";
+import DropDownOfAlignmentsToView from "./DropDownOfAlignmentsToView.js";
 
 function NavBar(props) {
   return (

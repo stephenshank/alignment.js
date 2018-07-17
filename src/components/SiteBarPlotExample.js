@@ -3,15 +3,15 @@ const $ = require("jquery");
 const text_width = require("text-width");
 
 import fastaParser from "./../helpers/fasta";
-import BaseAlignment from "./BaseAlignment.jsx";
-import SiteAxis from "./SiteAxis.jsx";
-import Placeholder from "./Placeholder.jsx";
-import SequenceAxis from "./SequenceAxis.jsx";
+import BaseAlignment from "./BaseAlignment.js";
+import SiteAxis from "./SiteAxis.js";
+import Placeholder from "./Placeholder.js";
+import SequenceAxis from "./SequenceAxis.js";
 import ScrollBroadcaster from "./../helpers/ScrollBroadcaster";
 import { nucleotide_color, nucleotide_text_color } from "./../helpers/colors";
 import { siteComposition } from "./../helpers/nucleotideComposition";
-import BaseSiteBarPlot from "./BaseSiteBarPlot.jsx";
-import SitePlotAxis from "./SitePlotAxis.jsx";
+import BaseSiteBarPlot from "./BaseSiteBarPlot.js";
+import SitePlotAxis from "./SitePlotAxis.js";
 
 class SiteBarPlotExample extends Component {
   constructor(props) {
