@@ -30,11 +30,7 @@ test("Imports simple fasta correctly.", () => {
   expect(parsedFasta).toEqual(internalFastaDataStructure);
 });
 
-test.only("Import simple fna correctly.", () => {
-  const internalFnaDataStructure = {
-      fasta: internalFastaDataStructure,
-      newick: "((Seq1,Seq2),Seq3);"
-    },
-    parsed_fna = fnaParser(fna);
-  expect(parsed_fna).toEqual(internalFnaDataStructure);
+test("Import simple fna correctly.", () => {
+  const parsed_fna = fnaParser(fna);
+  expect(parsed_fna.sequence_data).toEqual(internalFastaDataStructure);
 });

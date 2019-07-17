@@ -51,7 +51,7 @@ function fnaParser(fna, sortFASTA) {
   if (sortFASTA) {
     sortFASTAAndNewick(sequence_data, tree);
   }
-  return { sequence_data, tree };
+  return { sequence_data, tree, newick };
 }
 
 function fnaToText(fna) {
