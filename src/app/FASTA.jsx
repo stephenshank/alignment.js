@@ -15,6 +15,7 @@ import Highlight from "./FASTA/highlight.jsx";
 import SVGAlignmentExample from "./FASTA/svg_example.jsx";
 import StartAtSiteAndSequence from "./FASTA/start_at_site_and_sequence.jsx";
 import Lowercase from "./FASTA/lowercase.jsx";
+import SequenceBarChart from "./FASTA/sequence_bar_chart.jsx";
 
 class FASTAViewer extends Component {
   constructor(props) {
@@ -187,5 +188,6 @@ export {
   Highlight,
   StartAtSiteAndSequence,
   Lowercase,
-  SVGAlignmentExample
+  SVGAlignmentExample,
+  SequenceBarChart
 };

@@ -6,6 +6,7 @@ import SiteAxis from "./components/SiteAxis.jsx";
 import SitePlotAxis from "./components/SitePlotAxis.jsx";
 import SequenceAxis from "./components/SequenceAxis.jsx";
 import fastaParser from "./helpers/fasta";
+import SequenceBarChart from "./SequenceBarChart.jsx";
 import computeLabelWidth from "./helpers/computeLabelWidth";
 import ScrollBroadcaster from "./helpers/ScrollBroadcaster";
 import * as colors from "./helpers/colors";
@@ -24,6 +25,7 @@ export {
   SiteAxis,
   SitePlotAxis,
   SequenceAxis,
+  SequenceBarChart,
   fastaParser,
   computeLabelWidth,
   ScrollBroadcaster,

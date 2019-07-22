@@ -106,7 +106,9 @@ BaseAlignment.defaultProps = {
   molecule: mol => mol,
   site_size: 20,
   id: "alignmentjs",
-  sender: "main"
+  sender: "main",
+  width: 500,
+  height: 200
 };
 
 export default BaseAlignment;

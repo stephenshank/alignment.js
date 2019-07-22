@@ -65,6 +65,8 @@ function FASTALinks(props) {
       <Link to="/fasta-start" header="Start at a given sequence and site" />
       <Link to="/fasta-lowercase" header="Lower case alignment" />
       <Link to="/fasta-svg" header="SVG alignment" />
+      <Divider header="Graphs" />
+      <Link to="/fasta-seq-bar" header="Sequence bar chart" />
     </Dropdown>
   );
 }
@@ -131,6 +133,7 @@ class App extends Component {
           <Route path="/fasta-start" component={FASTA.StartAtSiteAndSequence} />
           <Route path="/fasta-lowercase" component={FASTA.Lowercase} />
           <Route path="/fasta-svg" component={FASTA.SVGAlignmentExample} />
+          <Route path="/fasta-seq-bar" component={FASTA.SequenceBarChart} />
 
           <Route path="/fna-viewer" component={FNA.FNAViewer} />
           <Route path="/fna-immunology" component={FNA.Immunology} />
