@@ -1,7 +1,13 @@
 import React, { Component } from "react";
-import { text } from "d3";
+import { text, json } from "d3";
 import Phylotree from "react-phylotree";
 import { phylotree } from "phylotree";
+
+function fetcher(url) {
+  const extension = url.split(".")[1];
+  if (extension == "json") return json(url);
+  return text(url);
+}
 
 class DataFetcher extends Component {
   constructor(props) {
@@ -11,18 +17,36 @@ class DataFetcher extends Component {
     };
   }
   componentDidMount() {
-    const { source } = this.props;
-    text(source).then(data => this.setState({ data }));
+    const { source, modifier, child_prop } = this.props;
+    let sources, modifiers, child_props;
+    if (typeof source == "string") {
+      sources = [source];
+    } else {
+      sources = source;
+    }
+    if (typeof modifier == "function") {
+      modifiers = Array(sources.length).fill(modifier);
+    } else {
+      modifiers = modifier;
+    }
+    if (typeof child_prop == "string") {
+      child_props = [child_prop];
+    } else {
+      child_props = child_prop;
+    }
+    Promise.all(sources.map(fetcher)).then(values => {
+      const data = {};
+      values.forEach((value, i) => {
+        data[child_props[i]] = modifiers[i](value);
+      });
+      this.setState({ data });
+    });
   }
   render() {
     if (!this.state.data) {
       return null;
     }
-    const { modifier, child_prop, children } = this.props,
-      data = modifier(this.state.data),
-      child_props = {};
-    child_props[child_prop] = data;
-    return React.cloneElement(children, child_props);
+    return React.cloneElement(this.props.children, this.state.data);
   }
 }
 
