@@ -3185,6 +3185,11 @@ d3-random@1:
   resolved "https://registry.yarnpkg.com/d3-random/-/d3-random-1.1.2.tgz#2833be7c124360bf9e2d3fd4f33847cfe6cab291"
   integrity sha512-6AK5BNpIFqP+cx/sreKzNjWbwZQCSUatxq+pPRmFIQaWuoD+NrbVWw7YWpHiXpCQ/NanKdtGDuB+VQcZDaEmYQ==
 
+d3-react-axis@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/d3-react-axis/-/d3-react-axis-0.0.1.tgz#edf187fd276478425015b6504f924660ece0e73b"
+  integrity sha512-ySVqrMP09TydLHhmJRDfR/8wyU0VPVMP4tqMeF5mb7tiBPPzMOQ6nVDJxvjQj4+GLAQAQHezW06JD3dEMZIj+A==
+
 d3-save-svg@^0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/d3-save-svg/-/d3-save-svg-0.0.2.tgz#74b35e82b943ea6c680f43498ac2eb3027823945"
