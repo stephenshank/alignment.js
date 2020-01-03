@@ -41,12 +41,10 @@ yarn
 Start the development server:
 
 ```
-yarn start
+yarn develop
 ```
 
-Visit `localhost:8000` in a browser (will read from environment variable `$PORT`).
-
-Note that this starts `webpack` in watch mode; refresh to observe changes.
+`webpack-dev-server` will determine a port, open your default browser, and refresh upon changes.
 
 ## Deployment
 
