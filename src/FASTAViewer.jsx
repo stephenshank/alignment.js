@@ -3,20 +3,13 @@ import { text } from "d3-fetch";
 import { saveAs } from "file-saver";
 import { saveSvgAsPng as savePNG } from "save-svg-as-png";
 
-import fastaParser, { fastaToText } from "../helpers/fasta";
-import Alignment from "../Alignment.jsx";
-import Button from "../components/Button.jsx";
-import FileUploadButton from "./FileUploadButton.jsx";
-import Modal from "./Modal.jsx";
-import SVGAlignment from "../SVGAlignment.jsx";
-import { nucleotide_color, nucleotide_difference } from "../helpers/colors";
-import AminoAcid from "./FASTA/amino_acid.jsx";
-import Highlight from "./FASTA/highlight.jsx";
-import SVGAlignmentExample from "./FASTA/svg_example.jsx";
-import StartAtSiteAndSequence from "./FASTA/start_at_site_and_sequence.jsx";
-import Lowercase from "./FASTA/lowercase.jsx";
-import SequenceBarChart from "./FASTA/sequence_bar_chart.jsx";
-import { ReadGraphExample } from "./FASTA/read_graph.jsx";
+import fastaParser, { fastaToText } from "./helpers/fasta";
+import Alignment from "./Alignment.jsx";
+import Button from "./components/Button.jsx";
+import FileUploadButton from "./components/FileUploadButton.jsx";
+import Modal from "./components/Modal.jsx";
+import SVGAlignment from "./SVGAlignment.jsx";
+import { nucleotide_color, nucleotide_difference } from "./helpers/colors";
 
 class FASTAViewer extends Component {
   constructor(props) {
@@ -27,6 +20,10 @@ class FASTAViewer extends Component {
       show_differences: "",
       saving: false
     };
+    this.handleFileChange = this.handleFileChange.bind(this);
+    this.scrollExcavator = this.scrollExcavator.bind(this);
+    this.trimData = this.trimData.bind(this);
+    this.saveAsPNG = this.saveAsPNG.bind(this);
   }
   componentDidMount() {
     text("data/CD2.fasta").then(data => this.loadFASTA(data));
@@ -64,7 +61,7 @@ class FASTAViewer extends Component {
       return mol == desired_record.seq[site - 1] ? "." : mol;
     };
   }
-  handleFileChange = e => {
+  handleFileChange(e) {
     const files = e.target.files;
     if (files.length == 1) {
       const file = files[0],
@@ -74,11 +71,11 @@ class FASTAViewer extends Component {
       };
       reader.readAsText(file);
     }
-  };
-  scrollExcavator = () => {
+  }
+  scrollExcavator() {
     return this.scrollExcavator.broadcaster.location();
-  };
-  trimData = (start_site, end_site) => {
+  }
+  trimData(start_site, end_site) {
     return this.state.data.map(record => {
       const new_record = {
         header: record.header,
@@ -86,8 +83,8 @@ class FASTAViewer extends Component {
       };
       return new_record;
     });
-  };
-  saveAsPNG = () => {
+  }
+  saveAsPNG() {
     const saving = true;
     const { x_pixel, x_pad, x_fraction, y_fraction } = this.scrollExcavator(),
       start_site = Math.floor(x_pixel / this.state.site_size),
@@ -106,7 +103,7 @@ class FASTAViewer extends Component {
         );
       });
     });
-  };
+  }
   render() {
     const toolbar_style = {
       display: "flex",
@@ -183,13 +180,4 @@ class FASTAViewer extends Component {
   }
 }
 
-export {
-  FASTAViewer,
-  AminoAcid,
-  Highlight,
-  StartAtSiteAndSequence,
-  Lowercase,
-  SVGAlignmentExample,
-  SequenceBarChart,
-  ReadGraphExample
-};
+export default FASTAViewer;

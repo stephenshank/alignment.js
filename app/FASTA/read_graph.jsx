@@ -2,18 +2,20 @@ import React from "react";
 import { scaleLinear } from "d3-scale";
 import { max } from "d3-array";
 
-import BaseAlignment from "../../components/BaseAlignment.jsx";
-import Placeholder from "../../components/Placeholder.jsx";
-import SiteAxis from "../../components/SiteAxis.jsx";
-import AxisTop from "../../components/AxisTop.jsx";
-import SequenceAxis from "../../components/SequenceAxis.jsx";
-import Network from "../../components/Network.jsx";
-import BaseSequenceBarPlot from "../../components/BaseSequenceBarPlot.jsx";
-import ScrollBroadcaster from "../../helpers/ScrollBroadcaster";
-import { DataFetcher } from "../Components.jsx";
-import fastaParser from "../../helpers/fasta";
-import computeLabelWidth from "../../helpers/computeLabelWidth";
-import css_grid_format from "../../helpers/format";
+import {
+  BaseAlignment,
+  Placeholder,
+  SiteAxis,
+  AxisTop,
+  SequenceAxis,
+  Network,
+  BaseSequenceBarPlot,
+  ScrollBroadcaster,
+  DataFetcher,
+  fastaParser,
+  computeLabelWidth,
+  css_grid_format
+} from "alignment.js";
 
 function ReadGraph(props) {
   const has_sequence_data = props.fasta || props.sequence_data;

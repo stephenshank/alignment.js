@@ -1,8 +1,6 @@
 import React from "react";
 
-import SequenceBarChart from "../../SequenceBarChart.jsx";
-import fastaParser from "../../helpers/fasta";
-import { DataFetcher } from "../Components.jsx";
+import { SequenceBarChart, fastaParser, DataFetcher } from "alignment.js";
 
 function Spreader(props) {
   // Quick wrapper around DataFetcher for multiple props (potential feature)

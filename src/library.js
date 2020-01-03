@@ -1,5 +1,4 @@
 import Alignment from "./Alignment.jsx";
-import BAMViewer from "./app/BAM.jsx";
 import BaseAlignment from "./components/BaseAlignment.jsx";
 import BaseSVGAlignment from "./components/BaseSVGAlignment.jsx";
 import SiteAxis from "./components/SiteAxis.jsx";
@@ -15,15 +14,13 @@ import computeLabelWidth from "./helpers/computeLabelWidth";
 import ScrollBroadcaster from "./helpers/ScrollBroadcaster";
 import * as colors from "./helpers/colors";
 import css_grid_format from "./helpers/format";
-import PreventDefaultPatch from "./prevent_default_patch";
-
-require("./app/styles.scss");
-
-PreventDefaultPatch(document);
+import FASTAViewer from "./FASTAViewer.jsx";
+import Button from "./components/Button.jsx";
+import SVGAlignment from "./SVGAlignment.jsx";
+import DataFetcher from "./components/DataFetcher.jsx";
 
 export default Alignment;
 export {
-  BAMViewer,
   BaseAlignment,
   BaseSVGAlignment,
   SiteAxis,
@@ -38,5 +35,9 @@ export {
   computeLabelWidth,
   ScrollBroadcaster,
   colors,
-  css_grid_format
+  css_grid_format,
+  FASTAViewer,
+  SVGAlignment,
+  Button,
+  DataFetcher
 };

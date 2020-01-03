@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { text } from "d3";
 
-import Alignment from "../../Alignment.jsx";
-import fastaParser from "../../helpers/fasta.js";
-import { nucleotide_color } from "../../helpers/colors.js";
+import Alignment, { fastaParser, colors } from "alignment.js";
 
 function highlight_codon_color(character, position, header) {
   if (header == "DUCK_VIETNAM_272_2005" && Math.floor((position - 1) / 3) == 3)
@@ -12,7 +10,7 @@ function highlight_codon_color(character, position, header) {
 }
 
 function highlight_codon_text_color(character, position, header) {
-  return character == "G" ? "Gold" : nucleotide_color(character);
+  return character == "G" ? "Gold" : colors.nucleotide_color(character);
 }
 
 class Highlight extends Component {

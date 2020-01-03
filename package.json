@@ -1,7 +1,7 @@
 {
   "name": "alignment.js",
   "version": "0.1.1",
-  "main": "lib/alignment.js",
+  "main": "lib/library.js",
   "license": "MIT",
   "dependencies": {
     "@gmod/bam": "^1.0.18",
@@ -9,14 +9,11 @@
     "d3": "5",
     "d3-react-axis": "^0.0.1",
     "d3-save-svg": "^0.0.2",
-    "express": "^4.16.4",
     "file-saver": "^2.0.0",
     "phylotree": "1.0.0-alpha.17",
-    "popper.js": "^1.14.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-phylotree": "0.1.0",
-    "react-router-dom": "^4.3.1",
     "save-svg-as-png": "^1.4.14",
     "text-width": "^1.2.0",
     "underscore": "^1.8.3"
@@ -24,58 +21,42 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.5.4",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^8.4.1",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "8",
+    "babel-plugin-convert-jsx-extension-to-js": "^0.0.1",
     "concurrently": "^4.1.0",
-    "css-loader": "^0.28.11",
     "eslint": "4.18.2",
     "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "file-loader": "^1.1.6",
     "html-webpack-plugin": "3",
     "husky": "^0.14.3",
     "jest": "^24.8.0",
     "lint-staged": "^7.2.0",
     "node-sass": "^4.9.0",
     "npx": "^9.7.1",
-    "postcss-loader": "^2.1.5",
     "prettier": "1.12.1",
-    "pretty-quick": "^1.6.0",
-    "sass-loader": "^7.0.1",
-    "style-loader": "^0.21.0",
-    "uglifyjs-webpack-plugin": "^1.1.4",
-    "webpack": "4",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.11",
-    "webpack-merge": "^4.1.1"
+    "pretty-quick": "^1.6.0"
   },
   "scripts": {
     "develop": "npx webpack-dev-server --config webpack.dev.js --open",
     "serve": "node src/server.js",
     "build-app": "npx webpack --config webpack.prod.js",
-    "build-lib": "npx webpack --config webpack.lib.js",
+    "build-lib":
+      "npx babel --out-dir lib src/ && cp src/styles.scss lib/alignment.css",
     "precommit": "pretty-quick --staged",
     "format": "prettier 'src/**/*.{js,jsx}' --write",
     "test": "jest"
   },
   "babel": {
-    "presets": ["@babel/preset-env", "@babel/preset-react"],
-    "plugins": ["@babel/plugin-proposal-class-properties"],
-    "env": {
-      "test": {
-        "presets": ["@babel/preset-env", "@babel/preset-react"]
-      }
-    }
+    "presets": ["@babel/preset-react"],
+    "plugins": ["babel-plugin-convert-jsx-extension-to-js"]
   },
-  "files": ["lib/alignment.js", "lib/alignment.css"],
+  "files": ["lib"],
   "repository": {
     "type": "git",
     "url": "https://github.com/veg/alignment.js"

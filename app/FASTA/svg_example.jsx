@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { text } from "d3-fetch";
 
-import fastaParser from "../../helpers/fasta";
-import SVGAlignment from "../../SVGAlignment.jsx";
-import Button from "../../components/Button.jsx";
+import Alignment, { fastaParser, SVGAlignment, Button } from "alignment.js";
 import { save as saveSVG } from "d3-save-svg";
 import { saveSvgAsPng as savePNG } from "save-svg-as-png";
 

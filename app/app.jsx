@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, NavLink } from "react-router-dom";
+import { FASTAViewer, FNAViewer } from "alignment.js";
 import "bootstrap";
-import "bootstrap/scss/bootstrap.scss";
 
-import Home from "./app/home.jsx";
-import * as FASTA from "./app/FASTA.jsx";
-import * as FNA from "./app/FNA.jsx";
-import * as BAM from "./app/BAM.jsx";
-import Components from "./app/Components.jsx";
-import PreventDefaultPatch from "./prevent_default_patch";
-import "./app/styles.scss";
+import Home from "./home.jsx";
+import AminoAcid from "./FASTA/amino_acid.jsx";
+import Highlight from "./FASTA/highlight.jsx";
+import StartAtSiteAndSequence from "./FASTA/start_at_site_and_sequence.jsx";
+import Lowercase from "./FASTA/lowercase.jsx";
+import SVGAlignmentExample from "./FASTA/svg_example.jsx";
+import SequenceBarChart from "./FASTA/sequence_bar_chart.jsx";
+import { ReadGraphExample } from "./FASTA/read_graph.jsx";
+
+import "./styles.scss";
 
 function Divider(props) {
   return [
@@ -104,8 +107,6 @@ function NavBar(props) {
         </NavLink>
         <div className="collapse navbar-collapse">
           <FASTALinks />
-          <FNALinks />
-          <BAMLinks />
         </div>
       </nav>
     </div>
@@ -126,24 +127,14 @@ class App extends Component {
         <NavBar />
         <div style={{ maxWidth: 1140 }} className="container-fluid">
           <Route exact path="/" render={props => <Home />} />
-
-          <Route path="/fasta-viewer" render={props => <FASTA.FASTAViewer />} />
-          <Route path="/fasta-aminoacid" component={FASTA.AminoAcid} />
-          <Route path="/fasta-highlight" component={FASTA.Highlight} />
-          <Route path="/fasta-start" component={FASTA.StartAtSiteAndSequence} />
-          <Route path="/fasta-lowercase" component={FASTA.Lowercase} />
-          <Route path="/fasta-svg" component={FASTA.SVGAlignmentExample} />
-          <Route path="/fasta-seq-bar" component={FASTA.SequenceBarChart} />
-          <Route path="/fasta-read-graph" component={FASTA.ReadGraphExample} />
-
-          <Route path="/fna-viewer" component={FNA.FNAViewer} />
-          <Route path="/fna-immunology" component={FNA.Immunology} />
-          <Route path="/fna-hiv" component={FNA.HIV} />
-          <Route path="/fna-basesvgtree" component={FNA.BaseSVGTreeInstance} />
-
-          <Route path="/sam-viewer" component={BAM.BAMViewer} />
-          <Route path="/sam-scaffold" component={BAM.ScaffoldExample} />
-          <Route path="/sam-variantcaller" component={BAM.VariantCaller} />
+          <Route exact path="/fasta-viewer" render={props => <FASTAViewer />} />
+          <Route path="/fasta-aminoacid" component={AminoAcid} />
+          <Route path="/fasta-highlight" component={Highlight} />
+          <Route path="/fasta-start" component={StartAtSiteAndSequence} />
+          <Route path="/fasta-lowercase" component={Lowercase} />
+          <Route path="/fasta-svg" component={SVGAlignmentExample} />
+          <Route path="/fasta-seq-bar" component={SequenceBarChart} />
+          <Route path="/fasta-read-graph" component={ReadGraphExample} />
         </div>
       </div>
     );
@@ -158,7 +149,6 @@ function Main(props) {
   );
 }
 
-PreventDefaultPatch(document);
 ReactDOM.render(
   <Main />,
   document.body.appendChild(document.createElement("div"))

@@ -3,15 +3,11 @@ import { scaleLinear } from "d3-scale";
 import { path } from "d3-path";
 import _ from "underscore";
 
+import { bidirectional_scroll } from "../helpers/scroll_events";
+
 class Network extends Component {
   componentDidMount() {
-    const { div_id } = this.props;
-    document
-      .getElementById(div_id)
-      .addEventListener("alignmentjs_wheel_event", function(e) {
-        $(`#${div_id}`).scrollLeft(e.detail.x_pixel);
-        $(`#${div_id}`).scrollTop(e.detail.y_pixel);
-      });
+    bidirectional_scroll.call(this);
   }
   handleWheel(e) {
     e.preventDefault();

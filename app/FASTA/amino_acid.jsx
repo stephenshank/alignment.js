@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { text } from "d3";
 
-import Alignment from "../../Alignment.jsx";
-import fastaParser from "../../helpers/fasta.js";
+import Alignment, { fastaParser, colors } from "alignment.js";
 
-class Lowercase extends Component {
+class AminoAcid extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +11,7 @@ class Lowercase extends Component {
     };
   }
   componentDidMount() {
-    text("data/CVF.fasta").then(data => {
+    text("data/CD2_AA.fasta").then(data => {
       const sequence_data = fastaParser(data);
       this.setState({ sequence_data });
     });
@@ -21,12 +20,16 @@ class Lowercase extends Component {
     return (
       <div>
         <div>
-          <h1>Display an alignment with lower case letters</h1>
+          <h1>Amino Acid Alignment</h1>
         </div>
-        <Alignment fasta={this.state.sequence_data} />
+        <Alignment
+          fasta={this.state.sequence_data}
+          site_color={colors.amino_acid_color}
+          text_color={colors.amino_acid_text_color}
+        />
       </div>
     );
   }
 }
 
-export default Lowercase;
+export default AminoAcid;

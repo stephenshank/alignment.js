@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { text } from "d3";
 
-import Alignment from "../../Alignment.jsx";
-import fastaParser from "../../helpers/fasta.js";
+import Alignment, { fastaParser } from "alignment.js";
 
 class StartAtSiteAndSequence extends Component {
   constructor(props) {

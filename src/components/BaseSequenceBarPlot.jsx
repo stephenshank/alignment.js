@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { scaleLinear } from "d3-scale";
 
+import { vertical_scroll } from "../helpers/scroll_events";
+
 class BaseSequenceBarPlot extends Component {
   componentDidMount() {
-    const { div_id } = this.props;
-    document
-      .getElementById(div_id)
-      .addEventListener("alignmentjs_wheel_event", function(e) {
-        $(`#${div_id}`).scrollTop(e.detail.y_pixel);
-      });
+    vertical_scroll.call(this);
   }
   handleWheel(e) {
     e.preventDefault();
