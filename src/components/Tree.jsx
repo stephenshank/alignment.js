@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Phylotree from "react-phylotree";
-const $ = require("jquery");
+
+import { vertical_scroll } from "../helpers/scroll_events";
 
 class Tree extends Component {
   constructor(props) {
@@ -9,17 +10,7 @@ class Tree extends Component {
       div_id: props.id + "-tree-div"
     };
   }
-  componentDidMount() {
-    const { div_id } = this.state;
-    document
-      .getElementById(div_id)
-      .addEventListener("alignmentjs_wheel_event", function(e) {
-        $(`#${div_id}`).scrollTop(e.detail.y_pixel);
-      });
-  }
-  componentDidUpdate(nextProps) {
-    $(`#${this.state.div_id}`).scrollTop(this.props.y_pixel);
-  }
+  componentDidMount() {}
   handleWheel(e) {
     e.preventDefault();
     this.props.scroll_broadcaster.handleWheel(e, this.props.sender);

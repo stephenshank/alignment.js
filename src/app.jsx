@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, NavLink } from "react-router-dom";
 import "bootstrap";
 import "bootstrap/scss/bootstrap.scss";
-const $ = require("jquery");
 
 import Home from "./app/home.jsx";
 import * as FASTA from "./app/FASTA.jsx";

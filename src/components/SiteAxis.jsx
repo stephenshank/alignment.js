@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import * as d3 from "d3";
 
-const d3 = require("d3");
-const $ = require("jquery");
+import { horizontal_scroll } from "../helpers/scroll_events";
 
 class SiteAxis extends Component {
   initialize() {
@@ -33,16 +33,10 @@ class SiteAxis extends Component {
         .attr("class", "axis")
         .attr("transform", `translate(0, ${height - 2})`)
         .call(axis);
-
-      $("#alignmentjs-axis-div").scrollLeft(this.props.x_pixel);
     }
   }
   componentDidMount() {
-    document
-      .getElementById("alignmentjs-axis-div")
-      .addEventListener("alignmentjs_wheel_event", function(e) {
-        $("#alignmentjs-axis-div").scrollLeft(e.detail.x_pixel);
-      });
+    horizontal_scroll.call(this);
     this.initialize();
   }
   componentDidUpdate() {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-const $ = require("jquery");
+import { vertical_scroll } from "../helpers/scroll_events";
 
 function BaseSequenceAxis(props) {
   const { sequence_data, label_padding, site_size, width } = props,
@@ -42,15 +42,7 @@ class SequenceAxis extends Component {
     this.div_id = props.id + "-labels-div";
   }
   componentDidMount() {
-    const { div_id } = this;
-    document
-      .getElementById(div_id)
-      .addEventListener("alignmentjs_wheel_event", function(e) {
-        $(`#${div_id}`).scrollTop(e.detail.y_pixel);
-      });
-  }
-  componentDidUpdate(nextProps) {
-    $(`#${this.div_id}`).scrollTop(this.props.y_pixel);
+    vertical_scroll.call(this);
   }
   handleWheel(e) {
     e.preventDefault();

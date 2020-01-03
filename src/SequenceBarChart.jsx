@@ -27,7 +27,7 @@ function SequenceBarChart(props) {
     alignment_width = Math.min(full_pixel_width, base_alignment_width),
     alignment_height = Math.min(full_pixel_height, height - axis_height),
     scale = scaleLinear()
-      .domain([0, d3.max(props.data)])
+      .domain([0, max(props.data)])
       .range([props.left_bar_padding, bar_width - props.right_bar_padding]),
     container_style = {
       display: "grid",

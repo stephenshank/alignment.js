@@ -1,5 +1,6 @@
 import React from "react";
 import { scaleLinear } from "d3-scale";
+import { max } from "d3-array";
 
 import BaseAlignment from "../../components/BaseAlignment.jsx";
 import Placeholder from "../../components/Placeholder.jsx";
@@ -40,7 +41,7 @@ function ReadGraph(props) {
     base_alignment_width = (width - bar_width - label_width) / 2,
     base_alignment_height = height - axis_height,
     bar_scale = scaleLinear()
-      .domain([0, d3.max(data)])
+      .domain([0, max(data)])
       .range([props.left_bar_padding, bar_width - props.right_bar_padding]),
     node_x_scale = scaleLinear()
       .domain([0, number_of_sites - 1])
