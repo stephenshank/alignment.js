@@ -48,6 +48,7 @@
     "build-app": "npx webpack --config webpack.prod.js",
     "build-lib":
       "npx babel --out-dir lib src/ && cp src/styles.scss lib/alignment.css",
+    "develop-lib": "npx babel --watch --out-dir lib src/",
     "precommit": "pretty-quick --staged",
     "format": "prettier 'src/**/*.{js,jsx}' --write",
     "test": "jest"

@@ -34,8 +34,8 @@ class Highlight extends Component {
         </div>
         <Alignment
           fasta={this.state.sequence_data}
-          site_color={highlight_codon_color}
-          text_color={highlight_codon_text_color}
+          siteColor={highlight_codon_color}
+          textColor={highlight_codon_text_color}
         />
       </div>
     );

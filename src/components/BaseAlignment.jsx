@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import {
   nucleotide_color,
   nucleotide_text_color,
@@ -8,39 +8,21 @@ import {
 
 const _ = require("underscore");
 
-class BaseAlignment extends Component {
-  constructor(props) {
-    super(props);
-    this.canvas_id = props.id + "-alignment";
-  }
-  componentDidMount() {
-    document
-      .getElementById(this.canvas_id)
-      .addEventListener("alignmentjs_wheel_event", e => {
-        this.draw(e.detail.x_pixel, e.detail.y_pixel);
-      });
-    if (this.props.sequence_data) {
-      this.draw(this.props.x_pixel || 0, this.props.y_pixel || 0);
-    }
-  }
-  componentDidUpdate() {
-    this.draw(this.props.x_pixel || 0, this.props.y_pixel || 0);
-  }
-  draw(x_pixel, y_pixel) {
-    if (this.props.disableVerticalScrolling) y_pixel = 0;
-    const { width, height, site_size, molecule } = this.props,
-      start_site = Math.floor(x_pixel / site_size),
-      end_site = Math.ceil((x_pixel + width) / site_size),
-      start_seq = Math.floor(y_pixel / site_size),
-      end_seq = Math.ceil((y_pixel + height) / site_size),
-      site_color = this.props.amino_acid
-        ? amino_acid_color
-        : this.props.site_color,
-      text_color = this.props.amino_acid
-        ? amino_acid_text_color
-        : this.props.text_color;
+function BaseAlignment(props) {
+  const canvas_id = props.id + "-alignment",
+    div_id = props.id + "-alignment-div";
+  function draw(x_pixel, y_pixel) {
+    if (!props.sequenceData) return;
+    if (props.disableVerticalScrolling) y_pixel = 0;
+    const { width, height, siteSize, molecule } = props,
+      start_site = Math.floor(x_pixel / siteSize),
+      end_site = Math.ceil((x_pixel + width) / siteSize),
+      start_seq = Math.floor(y_pixel / siteSize),
+      end_seq = Math.ceil((y_pixel + height) / siteSize),
+      site_color = props.amino_acid ? amino_acid_color : props.siteColor,
+      text_color = props.amino_acid ? amino_acid_text_color : props.textColor;
     const individual_sites = _.flatten(
-      this.props.sequence_data
+      props.sequenceData
         .filter((row, i) => {
           const after_start = i >= start_seq;
           const before_finish = i <= end_seq;
@@ -60,51 +42,50 @@ class BaseAlignment extends Component {
             });
         })
     );
-    const context = document.getElementById(this.canvas_id).getContext("2d");
+    const context = document.getElementById(canvas_id).getContext("2d");
     context.font = "14px Courier";
     context.textAlign = "center";
     context.textBaseline = "middle";
     context.setTransform(1, 0, 0, 1, -x_pixel, -y_pixel);
     individual_sites.forEach(function(d) {
-      const x = site_size * (d.j - 1),
-        y = site_size * (d.i - 1),
+      const x = siteSize * (d.j - 1),
+        y = siteSize * (d.i - 1),
         mol = molecule(d.mol, d.j, d.header);
       context.beginPath();
       context.fillStyle = site_color(d.mol, d.j, d.header);
-      context.rect(x, y, site_size, site_size);
+      context.rect(x, y, siteSize, siteSize);
       context.fill();
       context.fillStyle = text_color(d.mol, d.j, d.header);
-      context.fillText(mol, x + site_size / 2, y + site_size / 2);
+      context.fillText(mol, x + siteSize / 2, y + siteSize / 2);
       context.closePath();
     });
   }
-  handleWheel(e) {
-    e.preventDefault();
-    this.props.scroll_broadcaster.handleWheel(e, this.props.sender);
-  }
-  render() {
-    const div_id = this.props.id + "-alignment-div";
-    return (
-      <div
-        id={div_id}
-        className="alignmentjs-container"
-        onWheel={e => this.handleWheel(e)}
-      >
-        <canvas
-          width={this.props.width}
-          height={this.props.height}
-          id={this.canvas_id}
-        />
-      </div>
-    );
-  }
+
+  useEffect(() => {
+    document
+      .getElementById(canvas_id)
+      .addEventListener("alignmentjs_wheel_event", e => {
+        draw(e.detail.x_pixel, e.detail.y_pixel);
+      });
+  });
+  return (
+    <div
+      id={div_id}
+      onWheel={e => {
+        e.preventDefault();
+        props.scrollBroadcaster.handleWheel(e, props.sender);
+      }}
+    >
+      <canvas width={props.width} height={props.height} id={canvas_id} />
+    </div>
+  );
 }
 
 BaseAlignment.defaultProps = {
-  site_color: nucleotide_color,
-  text_color: nucleotide_text_color,
+  siteColor: nucleotide_color,
+  textColor: nucleotide_text_color,
   molecule: mol => mol,
-  site_size: 20,
+  siteSize: 20,
   id: "alignmentjs",
   sender: "main",
   width: 500,

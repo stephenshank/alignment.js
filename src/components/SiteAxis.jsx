@@ -1,73 +1,51 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
+import { AxisTop } from "d3-react-axis";
 import * as d3 from "d3";
 
 import { horizontal_scroll } from "../helpers/scroll_events";
 
-class SiteAxis extends Component {
-  initialize() {
-    if (this.props.sequence_data) {
-      const { width, height, site_size, start_site } = this.props;
-      d3
-        .select("#alignmentjs-axis-div")
-        .style("width", width + "px")
-        .style("height", height + "px");
-      const { number_of_sites } = this.props.sequence_data,
-        alignment_width = site_size * number_of_sites;
-
-      var axis_scale = d3
-        .scaleLinear()
-        .domain([start_site + 1, start_site + number_of_sites])
-        .range([site_size / 2, alignment_width - site_size / 2]);
-
-      var axis_svg = d3.select("#alignmentjs-axis");
-      axis_svg.html("");
-      axis_svg.attr("width", alignment_width).attr("height", height);
-
-      var axis = d3
-        .axisTop()
-        .scale(axis_scale)
-        .tickValues(d3.range(start_site + 1, start_site + number_of_sites, 2));
-
-      axis_svg
-        .append("g")
-        .attr("class", "axis")
-        .attr("transform", `translate(0, ${height - 2})`)
-        .call(axis);
-    }
-  }
-  componentDidMount() {
-    horizontal_scroll.call(this);
-    this.initialize();
-  }
-  componentDidUpdate() {
-    this.initialize();
-  }
-  handleWheel(e) {
-    e.preventDefault();
-    this.props.scroll_broadcaster.handleWheel(e, this.props.sender);
-  }
-  render() {
-    return (
-      <div
-        id="alignmentjs-axis-div"
-        style={{ overflowY: "scroll", overflowX: "hidden" }}
-        onWheel={e => this.handleWheel(e)}
-      >
-        <svg
-          id="alignmentjs-axis"
-          width={this.props.width}
-          height={this.props.height}
+function SiteAxis(props) {
+  useEffect(() => {
+    horizontal_scroll("alignmentjs-axis-div");
+  });
+  if (!props.sequenceData) return <div id="alignmentjs-axis-div" />;
+  const { width, height, siteSize, startSite } = props,
+    { number_of_sites } = props.sequenceData,
+    alignment_width = siteSize * number_of_sites,
+    scale = d3
+      .scaleLinear()
+      .domain([startSite + 1, startSite + number_of_sites])
+      .range([siteSize / 2, alignment_width - siteSize / 2]),
+    tickValues = d3.range(startSite + 1, startSite + number_of_sites, 2);
+  return (
+    <div
+      id="alignmentjs-axis-div"
+      style={{
+        overflowY: "scroll",
+        overflowX: "hidden",
+        width: props.width,
+        heught: props.height
+      }}
+      onWheel={e => {
+        e.preventDefault();
+        props.scrollBroadcaster.handleWheel(e, props.sender);
+      }}
+    >
+      <svg id="alignmentjs-axis" width={alignment_width} height={props.height}>
+        <AxisTop
+          scale={scale}
+          tickValues={tickValues}
+          transform={`translate(0,${height - 2})`}
         />
-      </div>
-    );
-  }
+      </svg>
+    </div>
+  );
 }
 
 SiteAxis.defaultProps = {
-  x_pixel: 0,
-  site_size: 20,
+  siteSize: 20,
   sender: "main",
-  start_site: 0
+  startSite: 0
 };
 
 export default SiteAxis;
