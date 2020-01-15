@@ -7,7 +7,7 @@ import { horizontal_scroll } from "../helpers/scroll_events";
 function SiteAxis(props) {
   useEffect(() => {
     horizontal_scroll("alignmentjs-axis-div");
-  });
+  }, []);
   if (!props.sequenceData) return <div id="alignmentjs-axis-div" />;
   const { width, height, siteSize, startSite } = props,
     { number_of_sites } = props.sequenceData,

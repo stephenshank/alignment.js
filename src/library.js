@@ -14,7 +14,6 @@ import computeLabelWidth from "./helpers/computeLabelWidth";
 import ScrollBroadcaster from "./helpers/ScrollBroadcaster";
 import * as colors from "./helpers/colors";
 import css_grid_format from "./helpers/format";
-import FASTAViewer from "./FASTAViewer.jsx";
 import Button from "./components/Button.jsx";
 import SVGAlignment from "./SVGAlignment.jsx";
 import DataFetcher from "./components/DataFetcher.jsx";
@@ -36,7 +35,6 @@ export {
   ScrollBroadcaster,
   colors,
   css_grid_format,
-  FASTAViewer,
   SVGAlignment,
   Button,
   DataFetcher

@@ -37,6 +37,8 @@ class ScrollBroadcaster {
   }
   broadcast(x_fraction_candidate, y_fraction_candidate, sender) {
     const unit = this[sender];
+    x_fraction_candidate = x_fraction_candidate || unit.x_fraction;
+    y_fraction_candidate = y_fraction_candidate || unit.y_fraction;
     unit.x_fraction = Math.min(
       Math.max(0, x_fraction_candidate),
       unit.upper_x_fraction

@@ -40,7 +40,7 @@ function SequenceAxis(props) {
   const div_id = props.id + "-labels-div";
   useEffect(() => {
     vertical_scroll(div_id);
-  });
+  }, []);
   if (!props.sequenceData) {
     return <div id={div_id} />;
   }

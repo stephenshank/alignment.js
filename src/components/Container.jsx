@@ -19,6 +19,13 @@ function Container(props) {
     columnWidths: [],
     rowHeights: []
   });
+  const {
+    rowHeights,
+    columnWidths,
+    scrollBroadcaster,
+    sequenceData,
+    nCols
+  } = containerSpecs;
   useEffect(
     () => {
       if (!props.fasta) return;
@@ -104,19 +111,19 @@ function Container(props) {
   );
   useEffect(
     () => {
-      if (!containerSpecs.scrollBroadcaster) return;
-      containerSpecs.scrollBroadcaster.broadcast(0, 0, "main");
+      if (!scrollBroadcaster) return;
+      scrollBroadcaster.broadcast(0, 0, "main");
     },
     [containerSpecs]
   );
   useEffect(() => {}, [props.centerOnHeader, props.centerOnSite]);
-  const {
-    rowHeights,
-    columnWidths,
-    scrollBroadcaster,
-    sequenceData,
-    nCols
-  } = containerSpecs;
+  useEffect(
+    () => {
+      if (!scrollBroadcaster) return;
+      scrollBroadcaster.broadcast(null, null, "main");
+    },
+    [props.siteSize]
+  );
   return (
     <div
       style={{
@@ -133,7 +140,8 @@ function Container(props) {
           width: columnWidths[column],
           height: rowHeights[row],
           scrollBroadcaster: scrollBroadcaster,
-          sequenceData: sequenceData
+          sequenceData: sequenceData,
+          siteSize: props.siteSize
         });
       })}
     </div>

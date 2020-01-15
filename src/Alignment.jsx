@@ -9,7 +9,7 @@ import { nucleotide_color, nucleotide_text_color } from "./helpers/colors";
 
 function Alignment(props) {
   return (
-    <Container fasta={props.fasta}>
+    <Container fasta={props.fasta} siteSize={props.siteSize}>
       <Placeholder />
       <SiteAxis height={props.axis_height} />
       <SequenceAxis onClick={props.onSequenceClick} />
@@ -26,7 +26,8 @@ Alignment.defaultProps = {
   siteColor: nucleotide_color,
   textColor: nucleotide_text_color,
   molecule: mol => mol,
-  onSequenceClick: (label, i) => () => null
+  onSequenceClick: (label, i) => () => null,
+  siteSize: 20
 };
 
 export default Alignment;
