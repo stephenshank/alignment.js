@@ -93,8 +93,8 @@ function Container(props) {
         height: full_pixel_height,
         x_pad: width - non_alignment_width,
         y_pad: height - non_alignment_height,
-        x_pixel: 0,
-        y_pixel: 0,
+        x_pixel: scrollBroadcaster ? scrollBroadcaster["main"].x_pixel : 0,
+        y_pixel: scrollBroadcaster ? scrollBroadcaster["main"].y_pixel : 0,
         bidirectional: props.children
           .map(child => component_to_div_id[child.type.name])
           .filter(x => x)
@@ -107,7 +107,7 @@ function Container(props) {
         nCols: nCols
       });
     },
-    [props.fasta]
+    [props.fasta, props.siteSize]
   );
   useEffect(
     () => {

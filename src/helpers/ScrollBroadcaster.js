@@ -17,8 +17,8 @@ class ScrollBroadcaster {
       this[unit.name].bidirectional = unit.bidirectional;
       this[unit.name].horizontal = unit.horizontal;
       this[unit.name].vertical = unit.vertical;
-      this[unit.name].x_fraction = unit.x_pixel / unit.width || 0;
-      this[unit.name].y_fraction = unit.y_pixel / unit.height || 0;
+      this[unit.name].x_fraction = unit.x_fraction || 0;
+      this[unit.name].y_fraction = unit.y_fraction || 0;
       this[unit.name].upper_x_fraction =
         Math.max(unit.width - unit.x_pad, 0) / unit.width;
       this[unit.name].upper_y_fraction =
