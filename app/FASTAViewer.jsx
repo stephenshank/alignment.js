@@ -1,29 +1,27 @@
 import React, { Component } from "react";
+import Button from "react-bootstrap/Button";
 import { text } from "d3-fetch";
 import { saveAs } from "file-saver";
 import { saveSvgAsPng as savePNG } from "save-svg-as-png";
-
-import fastaParser, { fastaToText } from "./helpers/fasta";
-import Alignment from "./Alignment.jsx";
-import Button from "./components/Button.jsx";
-import FileUploadButton from "./components/FileUploadButton.jsx";
-import Modal from "./components/Modal.jsx";
-import SVGAlignment from "./SVGAlignment.jsx";
-import { nucleotide_color, nucleotide_difference } from "./helpers/colors";
+import Alignment, { SVGAlignment } from "alignment.js";
+import {
+  nucleotide_color,
+  nucleotide_difference
+} from "alignment.js/lib/helpers/colors";
+import Modal from "react-bootstrap/Modal";
+import fastaParser, { fastaToText } from "alignment.js/lib/helpers/fasta";
+import { FileUploadButton } from "./Components.jsx";
 
 class FASTAViewer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: null,
-      site_size: 20,
+      siteSize: 20,
       show_differences: "",
-      saving: false
+      showModal: false
     };
     this.handleFileChange = this.handleFileChange.bind(this);
-    this.scrollExcavator = this.scrollExcavator.bind(this);
-    this.trimData = this.trimData.bind(this);
-    this.saveAsPNG = this.saveAsPNG.bind(this);
   }
   componentDidMount() {
     text("data/CD2.fasta").then(data => this.loadFASTA(data));
@@ -49,12 +47,9 @@ class FASTAViewer extends Component {
   }
   molecule() {
     if (!this.state.show_differences) return molecule => molecule;
-    const data = this.state.saving
-        ? this.state.trimmed_sequence_data
-        : this.state.data,
-      desired_record = data.filter(
-        datum => datum.header == this.state.show_differences
-      )[0];
+    const desired_record = this.state.data.filter(
+      datum => datum.header == this.state.show_differences
+    )[0];
     return (mol, site, header) => {
       if (mol == "-") return "-";
       if (header == desired_record.header) return mol;
@@ -71,38 +66,6 @@ class FASTAViewer extends Component {
       };
       reader.readAsText(file);
     }
-  }
-  scrollExcavator() {
-    return this.scrollExcavator.broadcaster.location();
-  }
-  trimData(start_site, end_site) {
-    return this.state.data.map(record => {
-      const new_record = {
-        header: record.header,
-        seq: record.seq.slice(start_site, end_site)
-      };
-      return new_record;
-    });
-  }
-  saveAsPNG() {
-    const saving = true;
-    const { x_pixel, x_pad, x_fraction, y_fraction } = this.scrollExcavator(),
-      start_site = Math.floor(x_pixel / this.state.site_size),
-      end_site = Math.ceil((x_pixel + x_pad) / this.state.site_size),
-      axis_bounds = [start_site, end_site],
-      trimmed_sequence_data = this.trimData(start_site, end_site);
-    trimmed_sequence_data.number_of_sequences = trimmed_sequence_data.length;
-    trimmed_sequence_data.number_of_sites = trimmed_sequence_data[0].seq.length;
-    this.setState({ saving, trimmed_sequence_data, axis_bounds }, () => {
-      savePNG(document.getElementById("alignment-js-svg"), "alignment.png");
-      this.setState({ saving: false }, () => {
-        this.scrollExcavator.broadcaster.broadcast(
-          x_fraction,
-          y_fraction,
-          "main"
-        );
-      });
-    });
   }
   render() {
     const toolbar_style = {
@@ -124,17 +87,18 @@ class FASTAViewer extends Component {
         <h1>FASTA Viewer Application</h1>
         <div style={toolbar_style}>
           <FileUploadButton label="Import" onChange={this.handleFileChange} />
-          <Button label="Export" onClick={() => $("#modal").modal("show")} />
-          <Button label="Save as PNG" onClick={this.saveAsPNG} />
+          <Button onClick={() => this.setState({ showModal: true })}>
+            Export
+          </Button>
           <span>
             <label>Site size:</label>
             <input
               type="number"
-              value={this.state.site_size}
+              value={this.state.siteSize}
               min={15}
               max={100}
               step={5}
-              onChange={e => this.setState({ site_size: e.target.value })}
+              onChange={e => this.setState({ siteSize: e.target.value })}
             />
           </span>
           <span>
@@ -151,29 +115,31 @@ class FASTAViewer extends Component {
           </span>
         </div>
         <div>
-          {this.state.saving ? (
-            <SVGAlignment
-              sequence_data={this.state.trimmed_sequence_data}
-              molecule={this.molecule()}
-              site_color={this.siteColor()}
-              site_size={this.state.site_size}
-              axis_bounds={this.state.axis_bounds}
-            />
-          ) : (
-            <Alignment
-              fasta={this.state.data}
-              site_size={this.state.site_size}
-              molecule={this.molecule()}
-              site_color={this.siteColor()}
-              excavator={this.scrollExcavator}
-            />
-          )}
+          <Alignment
+            fasta={this.state.data}
+            siteSize={this.state.siteSize}
+            molecule={this.molecule()}
+            siteColor={this.siteColor()}
+          />
         </div>
-        <Modal title="Export fasta">
-          <Button label="Download" onClick={() => this.saveFASTA()} />
-          <div style={{ overflowY: "scroll", width: 400, height: 400 }}>
-            <p>{this.state.data ? fastaToText(this.state.data) : null}</p>
-          </div>
+        <Modal
+          onHide={() => this.setState({ showModal: false })}
+          show={this.state.showModal}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>FASTA</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Button onClick={() => this.saveFASTA()}>Download</Button>
+            <div style={{ overflowY: "scroll", width: 400, height: 400 }}>
+              <p>{this.state.data ? fastaToText(this.state.data) : null}</p>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => this.setState({ showModal: false })}>
+              Close
+            </Button>
+          </Modal.Footer>
         </Modal>
       </div>
     );

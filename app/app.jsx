@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { FASTAViewer, FNAViewer } from "alignment.js";
 
 import Home from "./home.jsx";
+import FASTAViewer from "./FASTAViewer.jsx";
 import AminoAcid from "./FASTA/amino_acid.jsx";
 import Highlight from "./FASTA/highlight.jsx";
 import StartAtSiteAndSequence from "./FASTA/start_at_site_and_sequence.jsx";

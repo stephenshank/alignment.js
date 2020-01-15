@@ -93,8 +93,13 @@ function Container(props) {
         height: full_pixel_height,
         x_pad: width - non_alignment_width,
         y_pad: height - non_alignment_height,
-        x_pixel: scrollBroadcaster ? scrollBroadcaster["main"].x_pixel : 0,
-        y_pixel: scrollBroadcaster ? scrollBroadcaster["main"].y_pixel : 0,
+        x_fraction: scrollBroadcaster
+          ? scrollBroadcaster["main"].x_fraction
+          : 0,
+        y_fraction: scrollBroadcaster
+          ? scrollBroadcaster["main"].y_fraction
+          : 0,
+        site_size: siteSize,
         bidirectional: props.children
           .map(child => component_to_div_id[child.type.name])
           .filter(x => x)
@@ -109,21 +114,10 @@ function Container(props) {
     },
     [props.fasta, props.siteSize]
   );
-  useEffect(
-    () => {
-      if (!scrollBroadcaster) return;
-      scrollBroadcaster.broadcast(0, 0, "main");
-    },
-    [containerSpecs]
-  );
-  useEffect(() => {}, [props.centerOnHeader, props.centerOnSite]);
-  useEffect(
-    () => {
-      if (!scrollBroadcaster) return;
-      scrollBroadcaster.broadcast(null, null, "main");
-    },
-    [props.siteSize]
-  );
+  useEffect(() => {
+    if (!scrollBroadcaster) return;
+    scrollBroadcaster.broadcast(null, null, "main");
+  });
   return (
     <div
       style={{
@@ -149,7 +143,7 @@ function Container(props) {
 }
 
 Container.defaultProps = {
-  pureSVG: false,
+  svg: false,
   shape: null,
   xPixel: 0,
   yPixel: 0,

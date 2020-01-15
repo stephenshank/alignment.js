@@ -1,5 +1,6 @@
 class ScrollBroadcaster {
   constructor(broadcast_units) {
+    this.site_size = broadcast_units.site_size;
     if (!Array.isArray(broadcast_units)) {
       if (!broadcast_units.name) {
         broadcast_units.name = "main";
@@ -61,15 +62,21 @@ class ScrollBroadcaster {
       const element = document.getElementById(recipient);
       element.dispatchEvent(wheel_event);
     });
+    const x = this.siteAndHeaderIndices();
   }
-  location() {
+  siteAndHeaderIndices() {
+    const unit = this["main"],
+      x_pixel = unit.x_fraction * unit.width,
+      y_pixel = unit.y_fraction * unit.height;
     return {
-      x_pixel: this["main"].width * this["main"].x_fraction,
-      y_pixel: this["main"].height * this["main"].y_fraction,
-      x_fraction: this["main"].x_fraction,
-      y_fraction: this["main"].y_fraction,
-      x_pad: this["main"].x_pad,
-      y_pad: this["main"].y_pad
+      sites: [
+        Math.floor(x_pixel / this.site_size),
+        Math.ceil((x_pixel + unit.x_pad) / this.site_size)
+      ],
+      sequences: [
+        Math.floor(y_pixel / this.site_size),
+        Math.ceil((x_pixel + unit.y_pad) / this.site_size)
+      ]
     };
   }
 }
