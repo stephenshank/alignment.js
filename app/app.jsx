@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { FASTAViewer, FNAViewer } from "alignment.js";
-import "bootstrap";
 
 import Home from "./home.jsx";
 import AminoAcid from "./FASTA/amino_acid.jsx";
@@ -15,62 +17,36 @@ import { ReadGraphExample } from "./FASTA/read_graph.jsx";
 
 import "./styles.scss";
 
-function Divider(props) {
-  return [
-    <div className="dropdown-divider" key="divider-div" />,
-    props.header ? (
-      <h6 className="dropdown-header" key="divider-header">
-        {props.header}
-      </h6>
-    ) : null
-  ];
-}
-
-function Link(props) {
-  return (
-    <NavLink className="dropdown-item link" to={props.to}>
-      {props.header}
-    </NavLink>
-  );
-}
-
-function Dropdown(props) {
-  return (
-    <ul className="navbar-nav ">
-      <li className="nav-item dropdown">
-        <a
-          className="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          {props.title}
-        </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          {props.children}
-        </div>
-      </li>
-    </ul>
-  );
-}
-
 function FASTALinks(props) {
   return (
-    <Dropdown title={"FASTA"}>
-      <Link to="/fasta-viewer" header="Viewer" />
-      <Divider header="Examples" />
-      <Link to="/fasta-aminoacid" header="Amino acid alignment" />
-      <Link to="/fasta-highlight" header="Highlight individual sites" />
-      <Link to="/fasta-start" header="Start at a given sequence and site" />
-      <Link to="/fasta-lowercase" header="Lower case alignment" />
-      <Link to="/fasta-svg" header="SVG alignment" />
-      <Divider header="Graphs" />
-      <Link to="/fasta-seq-bar" header="Sequence bar chart" />
-      <Link to="/fasta-read-graph" header="Read graph" />
-    </Dropdown>
+    <NavDropdown title="FASTA">
+      <NavDropdown.Item as={Link} to="/fasta-viewer">
+        Viewer
+      </NavDropdown.Item>
+      <NavDropdown.Divider />
+      <NavDropdown.Item as={Link} to="/fasta-aminoacid">
+        Amino acid alignment
+      </NavDropdown.Item>
+      <NavDropdown.Item as={Link} to="/fasta-highlight">
+        Highlight individual sites
+      </NavDropdown.Item>
+      <NavDropdown.Item as={Link} to="/fasta-start">
+        Start at a given sequence and site
+      </NavDropdown.Item>
+      <NavDropdown.Item as={Link} to="/fasta-lowercase">
+        Lower case alignment
+      </NavDropdown.Item>
+      <NavDropdown.Item as={Link} to="/fasta-svg">
+        SVG alignment
+      </NavDropdown.Item>
+      <NavDropdown.Divider />
+      <NavDropdown.Item as={Link} to="/fasta-seq-bar">
+        Sequence bar chart
+      </NavDropdown.Item>
+      <NavDropdown.Item as={Link} to="/fasta-read-graph">
+        Read graph
+      </NavDropdown.Item>
+    </NavDropdown>
   );
 }
 
@@ -97,59 +73,55 @@ function BAMLinks(props) {
   );
 }
 
-function NavBar(props) {
-  const show_import_export = props.viewing == "alignment";
-  return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <NavLink className="navbar-brand" to="/">
-          Javascript Alignment Viewer
-        </NavLink>
-        <div className="collapse navbar-collapse">
-          <FASTALinks />
-        </div>
-      </nav>
-    </div>
-  );
-}
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        <NavBar />
-        <div style={{ maxWidth: 1140 }} className="container-fluid">
-          <Route exact path="/" render={props => <Home />} />
-          <Route exact path="/fasta-viewer" render={props => <FASTAViewer />} />
-          <Route path="/fasta-aminoacid" component={AminoAcid} />
-          <Route path="/fasta-highlight" component={Highlight} />
-          <Route path="/fasta-start" component={StartAtSiteAndSequence} />
-          <Route path="/fasta-lowercase" component={Lowercase} />
-          <Route path="/fasta-svg" component={SVGAlignmentExample} />
-          <Route path="/fasta-seq-bar" component={SequenceBarChart} />
-          <Route path="/fasta-read-graph" component={ReadGraphExample} />
-        </div>
-      </div>
-    );
-  }
-}
-
-function Main(props) {
+function App() {
   return (
     <BrowserRouter>
-      <App />
+      <div>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand as={Link} to="/">
+            alignment.js
+          </Navbar.Brand>
+          <Nav className="mr-auto">
+            <FASTALinks />
+          </Nav>
+        </Navbar>
+        <div style={{ maxWidth: 1140 }} className="container-fluid">
+          <Switch>
+            <Route path="/fasta-viewer">
+              <FASTAViewer />
+            </Route>
+            <Route path="/fasta-aminoacid">
+              <AminoAcid />
+            </Route>
+            <Route path="/fasta-highlight">
+              <Highlight />
+            </Route>
+            <Route path="/fasta-start">
+              <StartAtSiteAndSequence />
+            </Route>
+            <Route path="/fasta-lowercase">
+              <Lowercase />
+            </Route>
+            <Route path="/fasta-svg">
+              <SVGAlignmentExample />
+            </Route>
+            <Route path="/fasta-seq-bar">
+              <SequenceBarChart />
+            </Route>
+            <Route path="/fasta-read-graph">
+              <ReadGraphExample />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
 
 ReactDOM.render(
-  <Main />,
+  <App />,
   document.body.appendChild(document.createElement("div"))
 );
