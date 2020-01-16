@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { flatten } from "underscore";
 import {
   nucleotide_color,
   nucleotide_text_color,
@@ -8,7 +9,7 @@ import {
 
 const _ = require("underscore");
 
-class BaseAlignment extends Component {
+class BaseCanvasAlignment extends Component {
   constructor(props) {
     super(props);
     this.canvas_id = props.id + "-alignment";
@@ -95,6 +96,66 @@ class BaseAlignment extends Component {
   }
 }
 
+function BaseSVGAlignment(props) {
+  const { sequenceData, siteSize } = props;
+  if (!sequenceData) return <g />;
+  const site_color = props.amino_acid ? amino_acid_color : props.siteColor,
+    text_color = props.amino_acid ? amino_acid_text_color : props.textColor;
+  console.log(site_color);
+  const characters = flatten(
+    sequenceData.map((sequence, i) => {
+      return sequence.seq.split("").map((character, j) => {
+        const x = siteSize * j,
+          y = siteSize * i,
+          half_site_size = siteSize / 2,
+          g_translate = `translate(${x}, ${y})`,
+          text_translate = `translate(${half_site_size}, ${half_site_size})`;
+        return (
+          <g transform={g_translate} key={[i, j]}>
+            <rect
+              x={0}
+              y={0}
+              width={siteSize + 1}
+              height={siteSize + 1}
+              fill={site_color(character, j + 1, sequence.header)}
+            />
+            <text
+              transform={text_translate}
+              fill={text_color(character)}
+              textAnchor="middle"
+              dy=".25em"
+            >
+              {props.molecule(character, j + 1, sequence.header)}
+            </text>
+          </g>
+        );
+      });
+    })
+  );
+  return (
+    <g
+      style={{
+        width: siteSize * sequenceData[0].seq.length,
+        height: siteSize * sequenceData.length,
+        fontFamily: "Courier"
+      }}
+      transform={`translate(${props.translateX},${props.translateY})`}
+    >
+      {characters}
+    </g>
+  );
+}
+
+BaseSVGAlignment.defaultProps = {
+  translateX: 0,
+  translateY: 0
+};
+
+function BaseAlignment(props) {
+  if (!props.svg) return <BaseCanvasAlignment {...props} />;
+  return <BaseSVGAlignment {...props} />;
+}
+
 BaseAlignment.defaultProps = {
   siteColor: nucleotide_color,
   textColor: nucleotide_text_color,
@@ -103,7 +164,8 @@ BaseAlignment.defaultProps = {
   id: "alignmentjs",
   sender: "main",
   width: 500,
-  height: 200
+  height: 200,
+  svg: false
 };
 
 export default BaseAlignment;

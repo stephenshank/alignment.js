@@ -14,6 +14,14 @@ function guessShape(number_of_components) {
   );
 }
 
+function cumulative_sum(array) {
+  return array.reduce((a, x, i) => [...a, x + (a[i - 1] || 0)], []);
+}
+
+function get_translations(array) {
+  return [0, ...cumulative_sum(array).slice(0, array.length - 1)];
+}
+
 function Container(props) {
   const [containerSpecs, setContainerSpecs] = useState({
     columnWidths: [],
@@ -115,17 +123,46 @@ function Container(props) {
     [props.fasta, props.siteSize]
   );
   useEffect(() => {
-    if (!scrollBroadcaster) return;
+    if (!scrollBroadcaster || svg) return;
     scrollBroadcaster.broadcast(null, null, "main");
   });
+  const svg = props.svg ? scrollBroadcaster.siteAndHeaderIndices() : false;
+  if (!svg) {
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: css_grid_format(columnWidths),
+          gridTemplateRows: css_grid_format(rowHeights)
+        }}
+      >
+        {props.children.map((child, index) => {
+          const row = Math.floor(index / nCols),
+            column = index % nCols;
+          return React.cloneElement(child, {
+            key: index,
+            width: columnWidths[column],
+            height: rowHeights[row],
+            scrollBroadcaster: scrollBroadcaster,
+            sequenceData: sequenceData,
+            siteSize: props.siteSize,
+            svg: svg
+          });
+        })}
+      </div>
+    );
+  }
+  const trimmedSequenceData = sequenceData
+      .slice(svg.sequences[0], svg.sequences[1])
+      .map(record => ({
+        header: record.header,
+        seq: record.seq.slice(svg.sites[0], svg.sites[1])
+      })),
+    translateXs = get_translations(columnWidths),
+    translateYs = get_translations(rowHeights);
+  trimmedSequenceData.number_of_sites = trimmedSequenceData[0].seq.length;
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: css_grid_format(columnWidths),
-        gridTemplateRows: css_grid_format(rowHeights)
-      }}
-    >
+    <svg width={props.width} height={props.height}>
       {props.children.map((child, index) => {
         const row = Math.floor(index / nCols),
           column = index % nCols;
@@ -134,11 +171,14 @@ function Container(props) {
           width: columnWidths[column],
           height: rowHeights[row],
           scrollBroadcaster: scrollBroadcaster,
-          sequenceData: sequenceData,
-          siteSize: props.siteSize
+          sequenceData: trimmedSequenceData,
+          siteSize: props.siteSize,
+          translateX: translateXs[column],
+          translateY: translateYs[row],
+          svg: svg
         });
       })}
-    </div>
+    </svg>
   );
 }
 

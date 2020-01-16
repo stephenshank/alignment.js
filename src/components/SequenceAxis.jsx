@@ -36,7 +36,7 @@ BaseSequenceAxis.defaultProps = {
   onClick: (label, i) => () => null
 };
 
-function SequenceAxis(props) {
+function SequenceCanvasAxis(props) {
   const div_id = props.id + "-labels-div";
   useEffect(() => {
     vertical_scroll(div_id);
@@ -67,6 +67,11 @@ function SequenceAxis(props) {
       </svg>
     </div>
   );
+}
+
+function SequenceAxis(props) {
+  if (!props.svg) return <SequenceCanvasAxis {...props} />;
+  return <BaseSequenceAxis {...props} />;
 }
 
 SequenceAxis.defaultProps = {

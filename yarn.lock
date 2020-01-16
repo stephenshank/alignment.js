@@ -1900,10 +1900,12 @@ d3-random@1:
   resolved "https://registry.yarnpkg.com/d3-random/-/d3-random-1.1.2.tgz#2833be7c124360bf9e2d3fd4f33847cfe6cab291"
   integrity sha512-6AK5BNpIFqP+cx/sreKzNjWbwZQCSUatxq+pPRmFIQaWuoD+NrbVWw7YWpHiXpCQ/NanKdtGDuB+VQcZDaEmYQ==
 
-d3-react-axis@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/d3-react-axis/-/d3-react-axis-0.0.1.tgz#edf187fd276478425015b6504f924660ece0e73b"
-  integrity sha512-ySVqrMP09TydLHhmJRDfR/8wyU0VPVMP4tqMeF5mb7tiBPPzMOQ6nVDJxvjQj4+GLAQAQHezW06JD3dEMZIj+A==
+d3-react-axis@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/d3-react-axis/-/d3-react-axis-0.0.2.tgz#f3a9e52c9ad94dcdfbdca4a98349297a4c87bc16"
+  integrity sha512-losdXi/6fWEUXdUyv2jR5RFTmI8V+Nsf5Wen+THpI10uDCoSs9OjI++pbpRjRWFPnti2rOvW/M0R2tplof2DOQ==
+  dependencies:
+    react "^16.12.0"
 
 d3-save-svg@^0.0.2:
   version "0.0.2"
@@ -6407,6 +6409,15 @@ react-transition-group@^4.0.0:
     "@babel/runtime" "^7.4.5"
     dom-helpers "^3.4.0"
     loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react@^16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
+  integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
     prop-types "^15.6.2"
 
 react@^16.2.0, react@^16.6.3:

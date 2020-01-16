@@ -19,7 +19,8 @@ class FASTAViewer extends Component {
       data: null,
       siteSize: 20,
       show_differences: "",
-      showModal: false
+      showModal: false,
+      view: "canvas"
     };
     this.handleFileChange = this.handleFileChange.bind(this);
   }
@@ -98,12 +99,23 @@ class FASTAViewer extends Component {
               min={15}
               max={100}
               step={5}
-              onChange={e => this.setState({ siteSize: e.target.value })}
+              onChange={e => this.setState({ siteSize: +e.target.value })}
             />
+          </span>
+          <span>
+            <label>View:</label>
+            <select
+              value={this.state.view}
+              onChange={e => this.setState({ view: e.target.value })}
+            >
+              <option value="canvas">Canvas</option>
+              <option value="svg">SVG</option>
+            </select>
           </span>
           <span>
             <label>Highlight difference from:</label>
             <select
+              style={{ width: 100 }}
               value={this.state.show_differences}
               onChange={e =>
                 this.setState({ show_differences: e.target.value })
@@ -120,6 +132,7 @@ class FASTAViewer extends Component {
             siteSize={this.state.siteSize}
             molecule={this.molecule()}
             siteColor={this.siteColor()}
+            svg={this.state.view == "svg"}
           />
         </div>
         <Modal

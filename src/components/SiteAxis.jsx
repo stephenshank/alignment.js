@@ -4,27 +4,27 @@ import * as d3 from "d3";
 
 import { horizontal_scroll } from "../helpers/scroll_events";
 
-function SiteAxis(props) {
+function SiteCanvasAxis(props) {
   useEffect(() => {
     horizontal_scroll("alignmentjs-axis-div");
   }, []);
   if (!props.sequenceData) return <div id="alignmentjs-axis-div" />;
-  const { width, height, siteSize, startSite } = props,
+  const { width, height, siteSize } = props,
     { number_of_sites } = props.sequenceData,
     alignment_width = siteSize * number_of_sites,
     scale = d3
       .scaleLinear()
-      .domain([startSite + 1, startSite + number_of_sites])
+      .domain([1, number_of_sites])
       .range([siteSize / 2, alignment_width - siteSize / 2]),
-    tickValues = d3.range(startSite + 1, startSite + number_of_sites, 2);
+    tickValues = d3.range(1, number_of_sites, 2);
   return (
     <div
       id="alignmentjs-axis-div"
       style={{
         overflowY: "scroll",
         overflowX: "hidden",
-        width: props.width,
-        heught: props.height
+        width: width,
+        heught: height
       }}
       onWheel={e => {
         e.preventDefault();
@@ -42,10 +42,41 @@ function SiteAxis(props) {
   );
 }
 
+function SiteSVGAxis(props) {
+  if (!props.sequenceData) return <g />;
+  const { width, height, siteSize } = props,
+    { number_of_sites } = props.sequenceData,
+    start_site = props.svg.sites[0],
+    alignment_width = siteSize * number_of_sites,
+    scale = d3
+      .scaleLinear()
+      .domain([start_site + 1, start_site + number_of_sites])
+      .range([siteSize / 2, alignment_width - siteSize / 2]),
+    axis_start_site = 2 * Math.ceil(start_site / 2),
+    tickValues = d3.range(axis_start_site + 1, start_site + number_of_sites, 2);
+  return (
+    <g
+      height={props.height}
+      width={props.width}
+      transform={`translate(${props.translateX}, ${props.translateY})`}
+    >
+      <AxisTop
+        scale={scale}
+        tickValues={tickValues}
+        transform={`translate(0,${height - 1})`}
+      />
+    </g>
+  );
+}
+
+function SiteAxis(props) {
+  if (!props.svg) return <SiteCanvasAxis {...props} />;
+  return <SiteSVGAxis {...props} />;
+}
+
 SiteAxis.defaultProps = {
   siteSize: 20,
-  sender: "main",
-  startSite: 0
+  sender: "main"
 };
 
 export default SiteAxis;
