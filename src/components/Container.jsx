@@ -14,6 +14,10 @@ function guessShape(number_of_components) {
   );
 }
 
+function sum(array) {
+  return array.reduce((a, x) => a + x, 0);
+}
+
 function cumulative_sum(array) {
   return array.reduce((a, x, i) => [...a, x + (a[i - 1] || 0)], []);
 }
@@ -159,10 +163,13 @@ function Container(props) {
         seq: record.seq.slice(svg.sites[0], svg.sites[1])
       })),
     translateXs = get_translations(columnWidths),
-    translateYs = get_translations(rowHeights);
+    translateYs = get_translations(rowHeights),
+    height = sum(rowHeights),
+    width = sum(columnWidths);
   trimmedSequenceData.number_of_sites = trimmedSequenceData[0].seq.length;
   return (
-    <svg width={props.width} height={props.height}>
+    <svg id="alignmentjs-svg" width={width} height={height}>
+      <rect x="0" y="0" width={width} height={height} fill="white" />
       {props.children.map((child, index) => {
         const row = Math.floor(index / nCols),
           column = index % nCols;

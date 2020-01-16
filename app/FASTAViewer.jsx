@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { text } from "d3-fetch";
 import { saveAs } from "file-saver";
 import { saveSvgAsPng as savePNG } from "save-svg-as-png";
+import d3_save_svg from "d3-save-svg";
+import * as d3 from "d3";
 import Alignment, { SVGAlignment } from "alignment.js";
 import {
   nucleotide_color,
@@ -68,6 +71,20 @@ class FASTAViewer extends Component {
       reader.readAsText(file);
     }
   }
+  savePNG() {
+    this.setState({ view: "svg" }, () => {
+      savePNG(document.getElementById("alignmentjs-svg"), "alignment.png");
+      this.setState({ view: "canvas" });
+    });
+  }
+  saveSVG() {
+    this.setState({ view: "svg" }, () => {
+      d3_save_svg.save(d3.select("#alignmentjs-svg").node(), {
+        filename: "alignment"
+      });
+      this.setState({ view: "canvas" });
+    });
+  }
   render() {
     const toolbar_style = {
       display: "flex",
@@ -87,10 +104,14 @@ class FASTAViewer extends Component {
       <div>
         <h1>FASTA Viewer Application</h1>
         <div style={toolbar_style}>
-          <FileUploadButton label="Import" onChange={this.handleFileChange} />
-          <Button onClick={() => this.setState({ showModal: true })}>
-            Export
-          </Button>
+          <ButtonGroup>
+            <FileUploadButton label="Import" onChange={this.handleFileChange} />
+            <Button onClick={() => this.setState({ showModal: true })}>
+              Export
+            </Button>
+            <Button onClick={() => this.savePNG()}>Save PNG</Button>
+            <Button onClick={() => this.saveSVG()}>Save SVG</Button>
+          </ButtonGroup>
           <span>
             <label>Site size:</label>
             <input

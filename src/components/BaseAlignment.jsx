@@ -6,7 +6,6 @@ import {
   amino_acid_color,
   amino_acid_text_color
 } from "./../helpers/colors";
-
 const _ = require("underscore");
 
 class BaseCanvasAlignment extends Component {
@@ -100,8 +99,8 @@ function BaseSVGAlignment(props) {
   const { sequenceData, siteSize } = props;
   if (!sequenceData) return <g />;
   const site_color = props.amino_acid ? amino_acid_color : props.siteColor,
-    text_color = props.amino_acid ? amino_acid_text_color : props.textColor;
-  console.log(site_color);
+    text_color = props.amino_acid ? amino_acid_text_color : props.textColor,
+    offset = props.svg ? props.svg.sites[0] : 0;
   const characters = flatten(
     sequenceData.map((sequence, i) => {
       return sequence.seq.split("").map((character, j) => {
@@ -117,7 +116,7 @@ function BaseSVGAlignment(props) {
               y={0}
               width={siteSize + 1}
               height={siteSize + 1}
-              fill={site_color(character, j + 1, sequence.header)}
+              fill={site_color(character, j + 1 + offset, sequence.header)}
             />
             <text
               transform={text_translate}
@@ -125,7 +124,7 @@ function BaseSVGAlignment(props) {
               textAnchor="middle"
               dy=".25em"
             >
-              {props.molecule(character, j + 1, sequence.header)}
+              {props.molecule(character, j + 1 + offset, sequence.header)}
             </text>
           </g>
         );

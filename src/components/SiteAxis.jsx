@@ -56,8 +56,8 @@ function SiteSVGAxis(props) {
     tickValues = d3.range(axis_start_site + 1, start_site + number_of_sites, 2);
   return (
     <g
-      height={props.height}
-      width={props.width}
+      height={height}
+      width={width}
       transform={`translate(${props.translateX}, ${props.translateY})`}
     >
       <AxisTop
