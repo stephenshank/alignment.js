@@ -1,0 +1,701 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseSVGAlignment renders correctly with vanilla options 1`] = `
+<svg>
+  <g
+    style={
+      Object {
+        "fontFamily": "Courier",
+        "height": 60,
+        "width": 240,
+      }
+    }
+    transform="translate(0,0)"
+  >
+    <g
+      transform="translate(0, 0)"
+    >
+      <rect
+        fill="LightPink"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Red"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        A
+      </text>
+    </g>
+    <g
+      transform="translate(20, 0)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(40, 0)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(60, 0)"
+    >
+      <rect
+        fill="LemonChiffon"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="GoldenRod"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        G
+      </text>
+    </g>
+    <g
+      transform="translate(80, 0)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(100, 0)"
+    >
+      <rect
+        fill="LightPink"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Red"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        A
+      </text>
+    </g>
+    <g
+      transform="translate(120, 0)"
+    >
+      <rect
+        fill="LightPink"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Red"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        A
+      </text>
+    </g>
+    <g
+      transform="translate(140, 0)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(160, 0)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(180, 0)"
+    >
+      <rect
+        fill="LemonChiffon"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="GoldenRod"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        G
+      </text>
+    </g>
+    <g
+      transform="translate(200, 0)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(220, 0)"
+    >
+      <rect
+        fill="LightPink"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Red"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        A
+      </text>
+    </g>
+    <g
+      transform="translate(0, 20)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(20, 20)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(40, 20)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(60, 20)"
+    >
+      <rect
+        fill="LemonChiffon"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="GoldenRod"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        G
+      </text>
+    </g>
+    <g
+      transform="translate(80, 20)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(100, 20)"
+    >
+      <rect
+        fill="LightPink"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Red"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        A
+      </text>
+    </g>
+    <g
+      transform="translate(120, 20)"
+    >
+      <rect
+        fill="LightPink"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Red"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        A
+      </text>
+    </g>
+    <g
+      transform="translate(140, 20)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(160, 20)"
+    >
+      <rect
+        fill="LemonChiffon"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="GoldenRod"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        G
+      </text>
+    </g>
+    <g
+      transform="translate(180, 20)"
+    >
+      <rect
+        fill="LemonChiffon"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="GoldenRod"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        G
+      </text>
+    </g>
+    <g
+      transform="translate(200, 20)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(220, 20)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(0, 40)"
+    >
+      <rect
+        fill="LemonChiffon"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="GoldenRod"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        G
+      </text>
+    </g>
+    <g
+      transform="translate(20, 40)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(40, 40)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(60, 40)"
+    >
+      <rect
+        fill="LemonChiffon"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="GoldenRod"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        G
+      </text>
+    </g>
+    <g
+      transform="translate(80, 40)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(100, 40)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(120, 40)"
+    >
+      <rect
+        fill="LightPink"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Red"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        A
+      </text>
+    </g>
+    <g
+      transform="translate(140, 40)"
+    >
+      <rect
+        fill="LightPink"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Red"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        A
+      </text>
+    </g>
+    <g
+      transform="translate(160, 40)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+    <g
+      transform="translate(180, 40)"
+    >
+      <rect
+        fill="LemonChiffon"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="GoldenRod"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        G
+      </text>
+    </g>
+    <g
+      transform="translate(200, 40)"
+    >
+      <rect
+        fill="MediumPurple"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="DarkMagenta"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        C
+      </text>
+    </g>
+    <g
+      transform="translate(220, 40)"
+    >
+      <rect
+        fill="LightBlue"
+        height={21}
+        width={21}
+        x={0}
+        y={0}
+      />
+      <text
+        dy=".25em"
+        fill="Blue"
+        textAnchor="middle"
+        transform="translate(10, 10)"
+      >
+        T
+      </text>
+    </g>
+  </g>
+</svg>
+`;

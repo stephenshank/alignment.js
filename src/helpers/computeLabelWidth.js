@@ -1,4 +1,4 @@
-const text_width = require("text-width");
+import text_width from "text-width";
 
 function computeLabelWidth(sequence_data, padding) {
   const label_width = sequence_data

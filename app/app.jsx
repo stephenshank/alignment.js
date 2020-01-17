@@ -14,6 +14,7 @@ import Lowercase from "./FASTA/lowercase.jsx";
 import SVGAlignmentExample from "./FASTA/svg_example.jsx";
 import SequenceBarChart from "./FASTA/sequence_bar_chart.jsx";
 import { ReadGraphExample } from "./FASTA/read_graph.jsx";
+import AllSnapshots from "alignment.js/lib/snapshots";
 
 import "./styles.scss";
 
@@ -110,6 +111,9 @@ function App() {
             </Route>
             <Route path="/fasta-read-graph">
               <ReadGraphExample />
+            </Route>
+            <Route path="/snapshots">
+              <AllSnapshots />
             </Route>
             <Route path="/">
               <Home />
