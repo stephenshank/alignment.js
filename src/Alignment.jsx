@@ -11,12 +11,13 @@ function Alignment(props) {
   return (
     <Container fasta={props.fasta} siteSize={props.siteSize} svg={props.svg}>
       <Placeholder />
-      <SiteAxis height={props.axis_height} />
+      <SiteAxis />
       <SequenceAxis onClick={props.onSequenceClick} />
       <BaseAlignment
         siteColor={props.siteColor}
         textColor={props.textColor}
         molecule={props.molecule}
+        aminoAcid={props.aminoAcid}
       />
     </Container>
   );
@@ -28,6 +29,7 @@ Alignment.defaultProps = {
   molecule: mol => mol,
   onSequenceClick: (label, i) => () => null,
   siteSize: 20,
+  aminoAcid: false,
   svg: false
 };
 

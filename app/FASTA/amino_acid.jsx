@@ -22,11 +22,7 @@ class AminoAcid extends Component {
         <div>
           <h1>Amino Acid Alignment</h1>
         </div>
-        <Alignment
-          fasta={this.state.sequence_data}
-          site_color={colors.amino_acid_color}
-          text_color={colors.amino_acid_text_color}
-        />
+        <Alignment fasta={this.state.sequence_data} aminoAcid />
       </div>
     );
   }

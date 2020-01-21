@@ -28,10 +28,10 @@ class BaseCanvasAlignment extends Component {
       end_site = Math.ceil((x_pixel + width) / siteSize),
       start_seq = Math.floor(y_pixel / siteSize),
       end_seq = Math.ceil((y_pixel + height) / siteSize),
-      siteColor = this.props.amino_acid
+      siteColor = this.props.aminoAcid
         ? amino_acid_color
         : this.props.siteColor,
-      textColor = this.props.amino_acid
+      textColor = this.props.aminoAcid
         ? amino_acid_text_color
         : this.props.textColor;
     const individual_sites = _.flatten(
@@ -146,6 +146,10 @@ function BaseSVGAlignment(props) {
 }
 
 BaseSVGAlignment.defaultProps = {
+  siteColor: nucleotide_color,
+  textColor: nucleotide_text_color,
+  molecule: mol => mol,
+  siteSize: 20,
   translateX: 0,
   translateY: 0
 };
@@ -168,3 +172,4 @@ BaseAlignment.defaultProps = {
 };
 
 export default BaseAlignment;
+export { BaseSVGAlignment, BaseCanvasAlignment };
