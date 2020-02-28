@@ -14,6 +14,8 @@ import AminoAcid from "./FASTA/amino_acid.jsx";
 import Highlight from "./FASTA/highlight.jsx";
 import SVGAlignmentExample from "./FASTA/svg_example.jsx";
 import StartAtSiteAndSequence from "./FASTA/start_at_site_and_sequence.jsx";
+import Quasispecies from "./FASTA/quasispecies.jsx";
+import ArtificialRecombination from "./FASTA/artifical_recombination.jsx";
 import Lowercase from "./FASTA/lowercase.jsx";
 
 class FASTAViewer extends Component {
@@ -187,5 +189,7 @@ export {
   Highlight,
   StartAtSiteAndSequence,
   Lowercase,
-  SVGAlignmentExample
+  SVGAlignmentExample,
+  Quasispecies,
+  ArtificialRecombination
 };
